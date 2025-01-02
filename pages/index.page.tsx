@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <NextHead />
 
-      <div className="flex justify-center items-center h-screen bg-dark-blue-800">
+      <div className="flex justify-center items-center h-screen">
         <Card className="p-4 flex flex-col items-center">
           <CardHeader>
             <CardTitle className="text-3xl font-bold mb-4 text-white">
