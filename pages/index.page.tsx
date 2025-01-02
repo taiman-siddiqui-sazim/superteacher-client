@@ -21,7 +21,9 @@ export default function Home() {
       <div className="flex justify-center items-center h-screen bg-dark-blue-800">
         <Card className="p-4 flex flex-col items-center">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold mb-4 text-white">WELCOME TO SUPERTEACHER</CardTitle>
+            <CardTitle className="text-3xl font-bold mb-4 text-white">
+              WELCOME TO SUPERTEACHER
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-lg mb-4 text-white">Where learning and teaching come together!</p>
