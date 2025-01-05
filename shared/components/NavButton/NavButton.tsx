@@ -19,7 +19,7 @@ const NavButton: React.FC<INavButtonProps> = ({
     className={cn(
       active ? "bg-muted" : "",
       isNested ? "pl-8 h-6 my-1" : "",
-      "flex justify-between items-center w-full hover:bg-muted",
+      "flex justify-between items-center w-full hover:underline",
       className,
     )}
     {...props}

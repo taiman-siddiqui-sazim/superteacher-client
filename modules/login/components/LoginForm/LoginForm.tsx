@@ -1,7 +1,5 @@
-import React from "react";
-
-import { PasswordInput } from "@/shared/components/Form/PasswordInput";
-import { Button } from "@/shared/components/shadui/button";
+import React, { useEffect } from "react";
+import { Input, Button } from "@/shared/components/shadui";
 import {
   Form,
   FormControl,
@@ -9,48 +7,62 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/shadui/form";
-import { Input } from "@/shared/components/shadui/input";
-
+} from "@/shared/components/shadui";
+import { inputStyles, formMessageStyles } from "./LoginForm.styles";
 import { useLoginForm } from "./LoginForm.hooks";
+import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 
-const LoginForm = () => {
+const LoginForm = ({ clearErrors }: { clearErrors: boolean }) => {
   const { form, onSubmit } = useLoginForm();
+  const { watch, clearErrors: clearFormErrors } = form;
+
+  const email = watch("email");
+  const password = watch("password");
+
+  useEffect(() => {
+    if (clearErrors || email || password) {
+      clearFormErrors();
+    }
+  }, [clearErrors, email, password]);
 
   return (
-    <Form {...form}>
-      <form onSubmit={onSubmit}>
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Email" type="email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <PasswordInput placeholder="Password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit">Login</Button>
-      </form>
-    </Form>
+    <div className="w-full mx-auto p-2">
+      <Form {...form}>
+        <form onSubmit={onSubmit} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="relative">
+                <FormLabel className="text-green-500">Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email" type="email" {...field} className={inputStyles} />
+                </FormControl>
+                <FormMessage className={formMessageStyles} />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="relative">
+                <FormLabel className="text-green-500">Password</FormLabel>
+                <FormControl>
+                  <PasswordInput placeholder="Password" {...field} className={inputStyles} />
+                </FormControl>
+                <FormMessage className={formMessageStyles} />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-center">
+            <Button type="submit" className="w-1/3 bg-green-700 text-white hover:bg-green-600 mt-1">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 };
 
