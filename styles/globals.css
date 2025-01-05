@@ -66,13 +66,6 @@
   }
 }
 
-.error-message {
-  position: absolute;
-  color: red;
-  font-size: 0.875rem; /* Adjust the font size as needed */
-  margin-top: -1.5rem; /* Adjust the margin to position the error message correctly */
-}
-
 @layer base {
   * {
     @apply border-border;
