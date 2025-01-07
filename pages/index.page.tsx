@@ -6,11 +6,11 @@ import { Card, CardHeader, CardTitle, CardContent, Button } from "@/shared/compo
 export default function Home() {
   const router = useRouter();
 
-  const handleRegister = () => {
+  const redirectToRegister = () => {
     router.push("/register");
   };
 
-  const handleLogin = () => {
+  const redirectToLogin = () => {
     router.push("/login");
   };
 
@@ -32,14 +32,14 @@ export default function Home() {
             <Button
               variant="outline"
               className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
-              onClick={handleRegister}
+              onClick={redirectToRegister}
             >
               Register
             </Button>
             <Button
               variant="outline"
               className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
-              onClick={handleLogin}
+              onClick={redirectToLogin}
             >
               Login
             </Button>
