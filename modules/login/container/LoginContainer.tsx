@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import LoginForm from "../components/LoginForm/LoginForm";
+
 import ForgotPasswordModal from "@/modules/forgot-password/components/ForgotPasswordModal";
+
+import LoginForm from "../components/LoginForm/LoginForm";
 
 const LoginContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
   const [clearErrors, setClearErrors] = useState(false);
 
-  const handleForgotPasswordSubmit = (email: string) => {
-    setForgotPasswordEmail(email);
+  const handleForgotPasswordSubmit = () => {
     setIsModalOpen(false);
   };
 
@@ -41,7 +41,7 @@ const LoginContainer = () => {
           </button>
           <div className="flex items-center space-x-2">
             <a href="/register" className="text-sm text-green-500 hover:underline">
-              Don't have an account?
+              Don&apos;t have an account?
             </a>
             <span className="text-sm text-white-500">Get back and Register</span>
           </div>

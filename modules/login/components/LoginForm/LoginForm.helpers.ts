@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+
 import { TLoginFormFields } from "./LoginForm.types";
-import { UseFormReturn } from "react-hook-form";
 
 export const loginFormInitialValues: TLoginFormFields = {
   email: "",
@@ -14,9 +14,3 @@ export const loginFormValidationSchema = z.object({
 });
 
 export const loginFormValidationSchemaResolver = zodResolver(loginFormValidationSchema);
-
-export const clearFormErrors = (form: UseFormReturn<TLoginFormFields>) => {
-  return () => {
-    form.clearErrors();
-  };
-};

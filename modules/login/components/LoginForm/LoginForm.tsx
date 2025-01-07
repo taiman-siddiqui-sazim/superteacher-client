@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+
+import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 import { Input, Button } from "@/shared/components/shadui";
 import {
   Form,
@@ -8,11 +10,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/shared/components/shadui";
-import { inputStyles, formMessageStyles } from "./LoginForm.styles";
-import { useLoginForm } from "./LoginForm.hooks";
-import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 
-const LoginForm = ({ clearErrors }: { clearErrors: boolean }) => {
+import { useLoginForm } from "./LoginForm.hooks";
+
+const LoginForm = ({ clearErrors = false }: { clearErrors?: boolean }) => {
   const { form, onSubmit } = useLoginForm();
   const { watch, clearErrors: clearFormErrors } = form;
 
@@ -20,10 +21,22 @@ const LoginForm = ({ clearErrors }: { clearErrors: boolean }) => {
   const password = watch("password");
 
   useEffect(() => {
-    if (clearErrors || email || password) {
+    if (clearErrors) {
       clearFormErrors();
     }
-  }, [clearErrors, email, password]);
+  }, [clearErrors, clearFormErrors]);
+
+  useEffect(() => {
+    if (email) {
+      clearFormErrors("email");
+    }
+  }, [email, clearFormErrors]);
+
+  useEffect(() => {
+    if (password) {
+      clearFormErrors("password");
+    }
+  }, [password, clearFormErrors]);
 
   return (
     <div className="w-full mx-auto p-2">
@@ -36,9 +49,9 @@ const LoginForm = ({ clearErrors }: { clearErrors: boolean }) => {
               <FormItem className="relative">
                 <FormLabel className="text-green-500">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" type="email" {...field} className={inputStyles} />
+                  <Input placeholder="Email" type="email" {...field} className="input-styles" />
                 </FormControl>
-                <FormMessage className={formMessageStyles} />
+                <FormMessage className="form-message-styles" />
               </FormItem>
             )}
           />
@@ -49,9 +62,9 @@ const LoginForm = ({ clearErrors }: { clearErrors: boolean }) => {
               <FormItem className="relative">
                 <FormLabel className="text-green-500">Password</FormLabel>
                 <FormControl>
-                  <PasswordInput placeholder="Password" {...field} className={inputStyles} />
+                  <PasswordInput placeholder="Password" {...field} className="input-styles" />
                 </FormControl>
-                <FormMessage className={formMessageStyles} />
+                <FormMessage className="form-message-styles" />
               </FormItem>
             )}
           />
