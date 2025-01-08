@@ -1,7 +1,5 @@
 import { forwardRef, useState } from "react";
-
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 import { Button } from "../../shadui/button";
@@ -19,7 +17,7 @@ const PasswordInput = forwardRef<HTMLInputElement, ICustomInputProps>(
           type={showPassword ? "text" : "password"}
           className={cn(
             isError ? "border-destructive" : "",
-            "hide-password-toggle pr-10 placeholder:text-background-secondary-foreground invalid:border-destructive placeholder:opacity-50",
+            "hide-password-toggle pr-10 bg-white placeholder-gray-500 invalid:border-destructive",
             className,
           )}
           ref={ref}
@@ -29,7 +27,7 @@ const PasswordInput = forwardRef<HTMLInputElement, ICustomInputProps>(
           type="button"
           variant="ghost"
           size="sm"
-          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent disabled:bg-transparent"
+          className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent hover:text-gray-500 disabled:bg-transparent text-muted"
           onClick={() => setShowPassword((prev) => !prev)}
           disabled={disabled}
         >
@@ -42,13 +40,13 @@ const PasswordInput = forwardRef<HTMLInputElement, ICustomInputProps>(
         </Button>
 
         <style>{`
-					.hide-password-toggle::-ms-reveal,
-					.hide-password-toggle::-ms-clear {
-						visibility: hidden;
-						pointer-events: none;
-						display: none;
-					}
-				`}</style>
+          .hide-password-toggle::-ms-reveal,
+          .hide-password-toggle::-ms-clear {
+            visibility: hidden;
+            pointer-events: none;
+            display: none;
+          }
+        `}</style>
       </div>
     );
   },
