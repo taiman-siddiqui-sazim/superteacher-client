@@ -1,30 +1,50 @@
+import { useRouter } from "next/router";
+
 import NextHead from "@/shared/components/NextHead";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/shared/components/shadui/accordion";
+import { Card, CardHeader, CardTitle, CardContent, Button } from "@/shared/components/shadui";
 
 export default function Home() {
+  const router = useRouter();
+
+  const redirectToRegister = () => {
+    router.push("/register");
+  };
+
+  const redirectToLogin = () => {
+    router.push("/login");
+  };
+
   return (
     <>
       <NextHead />
 
-      <div className="flex justify-center items-center h-screen ">
-        <div className="p-4 flex flex-col items-center">
-          <h1 className="text-3xl font-bold">NextJS ShadUI Template</h1>
-          <div className="w-4/5">
-            <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>
-                  Is this template ready with all necessary libraries installed?
-                </AccordionTrigger>
-                <AccordionContent>Yes.</AccordionContent>
-              </AccordionItem>
-            </Accordion>
+      <div className="flex justify-center items-center h-screen">
+        <Card className="p-4 flex flex-col items-center">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold mb-4 text-white">
+              WELCOME TO SUPERTEACHER
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-lg mb-4 text-white">Where learning and teaching come together!</p>
+          </CardContent>
+          <div className="flex space-x-4">
+            <Button
+              variant="outline"
+              className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+              onClick={redirectToRegister}
+            >
+              Register
+            </Button>
+            <Button
+              variant="outline"
+              className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white"
+              onClick={redirectToLogin}
+            >
+              Login
+            </Button>
           </div>
-        </div>
+        </Card>
       </div>
     </>
   );
