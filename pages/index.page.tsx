@@ -26,7 +26,9 @@ export default function Home() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-base sm:text-lg md:text-xl mb-4 text-white">Where learning and teaching come together!</p>
+            <p className="text-base sm:text-lg md:text-xl mb-4 text-white">
+              Where learning and teaching come together!
+            </p>
           </CardContent>
           <div className="flex space-x-4">
             <Button
