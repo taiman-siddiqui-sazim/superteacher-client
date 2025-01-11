@@ -42,7 +42,7 @@ const Login: NextApplicationPage = () => {
           Back to Home
         </Button>
         {isLoading || user || isNavigating ? (
-          <Skeleton />
+          <Skeleton className="w-full h-full" />
         ) : (
           <div className="max-w-2xl w-full">
             <LoginContainer />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 import { Input, Button } from "@/shared/components/shadui";
@@ -19,6 +19,7 @@ const LoginForm = ({ clearErrors = false }: { clearErrors?: boolean }) => {
 
   const email = watch("email");
   const password = watch("password");
+  const prevPasswordRef = useRef(password);
 
   useEffect(() => {
     if (clearErrors) {
@@ -33,10 +34,11 @@ const LoginForm = ({ clearErrors = false }: { clearErrors?: boolean }) => {
   }, [email, clearFormErrors]);
 
   useEffect(() => {
-    if (password) {
+    if (prevPasswordRef.current === "" && password !== "") {
       clearFormErrors("password");
     }
-  }, [password, clearFormErrors]);
+    prevPasswordRef.current = password;
+  }, [password, prevPasswordRef, clearFormErrors]);
 
   return (
     <div className="w-full mx-auto p-2">
@@ -49,7 +51,13 @@ const LoginForm = ({ clearErrors = false }: { clearErrors?: boolean }) => {
               <FormItem className="relative">
                 <FormLabel className="text-green-500">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" type="email" {...field} className="input-styles" />
+                  <Input
+                    placeholder="Email"
+                    type="email"
+                    {...field}
+                    className="input-styles"
+                    autoComplete="off"
+                  />
                 </FormControl>
                 <FormMessage className="error-message-styles" />
               </FormItem>
