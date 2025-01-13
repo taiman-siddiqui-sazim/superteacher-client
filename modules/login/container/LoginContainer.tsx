@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Link from "next/link";
+
 import ForgotPasswordModal from "@/modules/forgot-password/components/ForgotPasswordModal";
 
 import LoginForm from "../components/LoginForm/LoginForm";
@@ -24,15 +26,17 @@ const LoginContainer = () => {
 
   return (
     <div className="flex justify-center items-center h-screen p-4">
-      <div className="max-w-lg w-1/2">
+      <div className="form-styles">
         <h1 className="text-2xl text-center text-green-500 mb-4">LOGIN</h1>
         <LoginForm clearErrors={clearErrors} />
-        <ForgotPasswordModal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          onSubmit={handleForgotPasswordSubmit}
-        />
-        <div className="flex flex-col items-center mt-4 space-y-2">
+        <div className="mt-8">
+          <ForgotPasswordModal
+            isOpen={isModalOpen}
+            onClose={handleModalClose}
+            onSubmit={handleForgotPasswordSubmit}
+          />
+        </div>
+        <div className="flex flex-col items-center mt-4 space-y-4">
           <button
             onClick={handleForgotPasswordClick}
             className="text-sm text-green-500 hover:underline bg-transparent border-none p-0"
@@ -40,10 +44,10 @@ const LoginContainer = () => {
             Forgot Password
           </button>
           <div className="flex items-center space-x-2">
-            <a href="/register" className="text-sm text-green-500 hover:underline">
-              Don&apos;t have an account?
-            </a>
-            <span className="text-sm text-white-500">Get back and Register</span>
+            <span className="text-sm text-white-500">Don&apos;t have an account?</span>
+            <Link href="/register" className="text-sm text-green-500 hover:underline">
+              Get back and register
+            </Link>
           </div>
         </div>
       </div>

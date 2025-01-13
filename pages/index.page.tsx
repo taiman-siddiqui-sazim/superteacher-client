@@ -19,14 +19,16 @@ export default function Home() {
       <NextHead />
 
       <div className="flex justify-center items-center h-screen">
-        <Card className="p-4 flex flex-col items-center">
+        <Card className="w-full p-4 flex flex-col items-center border-transparent">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold mb-4 text-white">
+            <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white text-center">
               WELCOME TO SUPERTEACHER
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-lg mb-4 text-white">Where learning and teaching come together!</p>
+            <p className="text-sm md:text-xl mb-4 text-white text-center">
+              Where learning and teaching come together!
+            </p>
           </CardContent>
           <div className="flex space-x-4">
             <Button

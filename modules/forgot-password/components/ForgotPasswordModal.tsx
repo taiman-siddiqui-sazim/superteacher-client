@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,7 @@ const ForgotPasswordModal: React.FC<IForgotPasswordProps> = ({ isOpen, onClose, 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white max-w-sm px-2">
+      <DialogContent className="bg-white max-w-xs px-2">
         <DialogHeader>
           <DialogTitle className="text-xl text-center text-green-500 mb-4">
             FORGOT PASSWORD

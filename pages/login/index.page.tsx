@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+
 import { useRouter } from "next/router";
+
 import LoginContainer from "@/modules/login/container/LoginContainer";
-import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import NextHead from "@/shared/components/NextHead";
-import { Button } from "@/shared/components/shadui";
+import { Button, Skeleton } from "@/shared/components/shadui";
 import { useSessionContext } from "@/shared/components/wrappers/AppInitializer/AppInitializerContext";
 import { DEFAULT_REDIRECT_PATH_AS_LOGGED_IN_USER } from "@/shared/constants/app.constants";
 import { NextApplicationPage } from "@/shared/typedefs";
@@ -41,7 +42,7 @@ const Login: NextApplicationPage = () => {
           Back to Home
         </Button>
         {isLoading || user || isNavigating ? (
-          <LoadingSpinner />
+          <Skeleton className="w-full h-full" />
         ) : (
           <div className="max-w-2xl w-full">
             <LoginContainer />
