@@ -74,13 +74,14 @@
 }
 
 .form-styles {
-  @apply max-w-lg sm:w-3/4 md:w-2/3 lg:w-1/2;
+  @apply max-w-lg sm:w-3/4 md:w-3/5 lg:w-1/2;
 }
 
 .input-styles {
   @apply w-full bg-white placeholder-gray-400 text-black;
+  @apply sm:text-base lg:text-sm;
 }
 
 .error-message-styles {
-  @apply absolute top-full left-0 w-full mt-1 text-red-700 text-sm;
+  @apply absolute top-full left-0 w-full mt-1 text-red-700 sm:text-base lg:text-sm;
 }

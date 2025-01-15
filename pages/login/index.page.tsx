@@ -37,7 +37,7 @@ const Login: NextApplicationPage = () => {
       <div className="relative flex justify-center items-center h-screen">
         <Button
           onClick={handleNavButtonClick}
-          className="absolute top-4 left-4 text-sm text-green-500 hover:underline bg-transparent hover:bg-transparent"
+          className="absolute top-4 left-4 sm:text-base lg:text-sm text-green-500 hover:underline bg-transparent hover:bg-transparent"
         >
           Back to Home
         </Button>
