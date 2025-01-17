@@ -19,7 +19,7 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
   const router = useRouter();
   const { isLoading, error, user } = useSessionContext();
   const isUnauthenticated = !isLoading && (error || !user);
-  const isUnauthorized = !isLoading && !error && user && !allowedRoles.includes(user.claim);
+  const isUnauthorized = !isLoading && !error && user && !allowedRoles.includes(user.user_type);
 
   useEffect(() => {
     if (isLoading || typeof location === "undefined") return;

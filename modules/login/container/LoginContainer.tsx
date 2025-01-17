@@ -44,8 +44,13 @@ const LoginContainer = () => {
             Forgot Password
           </button>
           <div className="flex items-center space-x-2">
-            <span className="sm:text-base lg:text-sm text-white-500">Don&apos;t have an account?</span>
-            <Link href="/register" className="sm:text-base lg:text-sm text-green-500 hover:underline">
+            <span className="sm:text-base lg:text-sm text-white-500">
+              Don&apos;t have an account?
+            </span>
+            <Link
+              href="/register"
+              className="sm:text-base lg:text-sm text-green-500 hover:underline"
+            >
               Get back and register
             </Link>
           </div>
