@@ -6,10 +6,15 @@ import { LuGraduationCap } from "react-icons/lu";
 import { TbBooks } from "react-icons/tb";
 
 import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
-import { Dialog, DialogOverlay, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/shadui/dialog";
+import {
+  Dialog,
+  DialogOverlay,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/shared/components/shadui/dialog";
 
 import { TRoleModalProps } from "./RoleModal.types";
-
 
 const RoleModal: React.FC<TRoleModalProps> = ({ isOpen, onClose }) => {
   const router = useRouter();

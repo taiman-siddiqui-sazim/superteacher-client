@@ -53,10 +53,7 @@ const LandingContainer = () => {
         </Card>
       </div>
 
-      <RoleModal
-        isOpen={isRoleModalOpen}
-        onClose={() => setIsRoleModalOpen(false)}
-      />
+      <RoleModal isOpen={isRoleModalOpen} onClose={() => setIsRoleModalOpen(false)} />
     </>
   );
 };
