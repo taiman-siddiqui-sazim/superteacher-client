@@ -1,30 +1,6 @@
-import {
-  EGender,
-  EEducationLevel,
-  EMedium,
-  ESchoolClass,
-  ECollegeClass,
-  EDegreeType,
-} from "@/shared/typedefs/enums";
-
-export type TStudentFormFields = {
-  firstName: string;
-  lastName: string;
-  gender: EGender;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  educationLevel: EEducationLevel;
-  password: string;
-  confirmPassword: string;
-  medium?: EMedium;
-  class?: ESchoolClass | ECollegeClass;
-  degreeType?: EDegreeType;
-  degreeName?: string;
-  semesterYear?: string;
-};
+import { TRegisterStudentFields } from "@/shared/redux/rtk-apis/auth/auth.types";
 
 export type TStudentFormInitialValues = Omit<
-  TStudentFormFields,
+  TRegisterStudentFields,
   "gender" | "educationLevel" | "medium" | "class" | "degreeType"
 >;

@@ -37,3 +37,18 @@ export enum EDegreeType {
   Bachelors = "Bachelor's",
   Masters = "Master's",
 }
+
+export enum EHighestEducationLevel {
+  Bachelors = "Bachelor's",
+  Masters = "Master's",
+  PhD = "PhD",
+}
+
+export enum ESubjects {
+  Physics = 'Physics',
+  Mathematics = 'Mathematics',
+  Chemistry = 'Chemistry',
+  Biology = 'Biology',
+  English = 'English',
+  Bangla = 'Bangla',
+}

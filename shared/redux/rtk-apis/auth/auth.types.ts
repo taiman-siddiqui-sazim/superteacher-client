@@ -5,7 +5,8 @@ import {
   ESchoolClass,
   ECollegeClass,
   EDegreeType,
-} from "@/shared/typedefs/enums";
+  EHighestEducationLevel
+} from "@/shared/typedefs";
 
 export type TLoginRequestFields = {
   email: string;
@@ -48,6 +49,19 @@ export type TRegisterStudentFields = {
   degreeType?: EDegreeType;
   degreeName?: string;
   semesterYear?: string;
+};
+
+export type TRegisterTeacherFields = {
+  firstName: string;
+  lastName: string;
+  uniqueCode: string;
+  gender: EGender;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  highestEducation: EHighestEducationLevel;
+  majorSubject: string;
+  subjects: string[];
 };
 
 export type TRegisterResponse = {

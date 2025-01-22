@@ -4,21 +4,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useRegisterStudentMutation } from "@/shared/redux/rtk-apis/auth/auth.api";
-import { TRegisterStudentFields } from "@/shared/redux/rtk-apis/auth/auth.types";
+import { useRegisterTeacherMutation } from "@/shared/redux/rtk-apis/auth/auth.api";
+import { TRegisterTeacherFields } from "@/shared/redux/rtk-apis/auth/auth.types";
 import { parseApiErrorMessage } from "@/shared/utils/errors";
 
-import { studentFormSchema } from "./StudentForm.schema";
+import { teacherFormSchema } from "./TeacherForm.schema";
 
-export const useStudentForm = () => {
-  const form = useForm<TRegisterStudentFields>({
-    resolver: zodResolver(studentFormSchema),
+export const useTeacherForm = () => {
+  const form = useForm<TRegisterTeacherFields>({
+    resolver: zodResolver(teacherFormSchema),
     reValidateMode: "onSubmit",
   });
-  const [register] = useRegisterStudentMutation();
+  const [register] = useRegisterTeacherMutation();
   const router = useRouter();
 
-  const onSubmit = async (values: TRegisterStudentFields) => {
+  const onSubmit = async (values: TRegisterTeacherFields) => {
     try {
       await register(values).unwrap();
       toast.success("Registration successful!");

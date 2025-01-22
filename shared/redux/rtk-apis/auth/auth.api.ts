@@ -6,6 +6,7 @@ import {
   TLoginResponse,
   TRegisterStudentFields,
   TRegisterResponse,
+  TRegisterTeacherFields,
 } from "./auth.types";
 
 const authApi = projectApi.injectEndpoints({
@@ -26,8 +27,16 @@ const authApi = projectApi.injectEndpoints({
       }),
       transformResponse: (response: TApiResponse<TRegisterResponse>) => response.data,
     }),
+    registerTeacher: builder.mutation<TRegisterResponse, TRegisterTeacherFields>({
+      query: (data) => ({
+        url: "register/teacher",
+        method: "POST",
+        body: data,
+      }),
+      transformResponse: (response: TApiResponse<TRegisterResponse>) => response.data,
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useLoginMutation, useRegisterStudentMutation } = authApi;
+export const { useLoginMutation, useRegisterStudentMutation, useRegisterTeacherMutation } = authApi;

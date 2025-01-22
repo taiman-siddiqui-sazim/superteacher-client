@@ -7,7 +7,7 @@ import {
   ESchoolClass,
   ECollegeClass,
   EDegreeType,
-} from "@/shared/typedefs/enums";
+} from "@/shared/typedefs";
 
 export const studentFormSchema = z
   .object({
