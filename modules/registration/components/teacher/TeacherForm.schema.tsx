@@ -14,11 +14,9 @@ export const teacherFormSchema = z
       .trim()
       .nonempty("Last name is required")
       .max(50, "Last name must be at most 50 characters"),
-    uniqueCode: z
-      .string()
-      .refine((val) => /^\d{6}$/.test(val), {
-        message: "Unique code must be a 6-digit number",
-      }),
+    uniqueCode: z.string().refine((val) => /^\d{6}$/.test(val), {
+      message: "Unique code must be a 6-digit number",
+    }),
     gender: z.nativeEnum(EGender, { errorMap: () => ({ message: "Invalid gender" }) }),
     email: z.string().min(1, "Email is required").email("Invalid email address"),
     password: z
@@ -36,9 +34,7 @@ export const teacherFormSchema = z
       .trim()
       .nonempty("Major subject is required")
       .max(50, "Major subject must be at most 50 characters"),
-    subjects: z
-      .array(z.string())
-      .min(1, "At least one subject is required"),
+    subjects: z.array(z.string()).min(1, "At least one subject is required"),
   })
   .superRefine((data, ctx) => {
     if (data.password !== data.confirmPassword) {

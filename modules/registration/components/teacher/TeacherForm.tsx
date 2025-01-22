@@ -326,10 +326,7 @@ const TeacherForm: React.FC = () => {
                   />
                 </FormControl>
                 <FormMessage
-                  className={cn(
-                    "text-red-500 mt-1 h-7 md:h-5",
-                    !errors.email ? "opacity-0" : "",
-                  )}
+                  className={cn("text-red-500 mt-1 h-7 md:h-5", !errors.email ? "opacity-0" : "")}
                 >
                   {errors.email?.message?.toString() || " "}
                 </FormMessage>

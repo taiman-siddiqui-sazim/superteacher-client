@@ -5,7 +5,7 @@ import {
   ESchoolClass,
   ECollegeClass,
   EDegreeType,
-  EHighestEducationLevel
+  EHighestEducationLevel,
 } from "@/shared/typedefs";
 
 export type TLoginRequestFields = {
