@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, ReactNode } from "react";
+import { forwardRef, useState, useEffect } from "react";
 
 import { EyeIcon, EyeOffIcon, Check, X } from "lucide-react";
 
@@ -6,15 +6,10 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "../../shadui/button";
 import { Input } from "../../shadui/input";
-import { ICustomInputProps } from "../CustomInput/CustomInput.types";
-
-interface IPasswordInputProps extends ICustomInputProps {
-  showValidation?: boolean;
-  onValidationChange?: (validationItems: ReactNode) => void;
-}
+import { IPasswordInputProps } from "./PasswordInput.interfaces";
 
 const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
-  ({ className, isError, showValidation, onValidationChange, ...props }, ref) => {
+  ({ className, isError, showValidation = false, onValidationChange, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const setValidations = useState({
       hasValidLength: false,
@@ -27,7 +22,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
     const disabled = props.value === "" || props.value === undefined || props.disabled;
 
     useEffect(() => {
-      if (props.value) {
+      if (showValidation && props.value) {
         const password = props.value as string;
         const newValidations = {
           hasValidLength: password.length >= 8 && password.length <= 128,
@@ -59,7 +54,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
           onValidationChange(validationItems);
         }
       }
-    }, [props.value, onValidationChange]);
+    }, [props.value, onValidationChange, setValidations, showValidation]);
 
     const ValidationItem = ({ isValid, text }: { isValid: boolean; text: string }) => (
       <div className="flex items-center space-x-2">
