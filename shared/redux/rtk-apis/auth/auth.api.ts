@@ -7,7 +7,7 @@ const authApi = projectApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<TLoginResponse, TLoginRequestFields>({
       query: (data) => ({
-        url: "auth/login",
+        url: "login",
         method: "POST",
         body: data,
       }),
