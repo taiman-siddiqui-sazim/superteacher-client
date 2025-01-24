@@ -12,10 +12,10 @@ const CustomSelectInput: React.FC<TCustomSelectInputProps> = ({
   dropdownClassname,
   placeholder,
 }) => {
-  const textStyles = value ? "text-foreground" : "text-background-secondary-foreground/50";
+  const textStyles = value ? "text-black" : "text-gray-400";
   const borderStyles = isError ? "border-destructive" : "";
 
-  const buttonClassnames = `px-2 bg-inherit focus-visible:ring-1 ${textStyles} ${borderStyles} w-full rounded-md border border-input bg-background placeholder:text-muted-foreground ${buttonClassname}`;
+  const buttonClassnames = `px-2 bg-inherit focus-visible:ring-1 ${textStyles} ${borderStyles} w-full rounded-md border border-input bg-background ${buttonClassname}`;
 
   const handleChange = (value: string) => {
     onChange(value);
