@@ -39,18 +39,13 @@ const LoginContainer = () => {
         <div className="flex flex-col items-center mt-4 space-y-4">
           <button
             onClick={handleForgotPasswordClick}
-            className="sm:text-base lg:text-sm text-green-500 hover:underline bg-transparent border-none p-0"
+            className="text-sm text-green-500 hover:underline bg-transparent border-none p-0"
           >
             Forgot Password
           </button>
           <div className="flex items-center space-x-2">
-            <span className="sm:text-base lg:text-sm text-white-500">
-              Don&apos;t have an account?
-            </span>
-            <Link
-              href="/register"
-              className="sm:text-base lg:text-sm text-green-500 hover:underline"
-            >
+            <span className="text-sm text-white-500">Don&apos;t have an account?</span>
+            <Link href="/register" className="text-sm text-green-500 hover:underline">
               Get back and register
             </Link>
           </div>

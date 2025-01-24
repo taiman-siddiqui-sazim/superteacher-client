@@ -6,10 +6,10 @@ export function parseApiErrorMessage(err: unknown) {
   }
 
   let errorMessage = "";
-  if (Array.isArray(err.data.message)) {
+  if (Array.isArray(err?.data?.message)) {
     errorMessage = err.data.message.join(", ");
   } else {
-    errorMessage = "Please try again later";
+    errorMessage = err?.data?.message || "Please try again later";
   }
 
   return errorMessage;
@@ -27,7 +27,8 @@ export function isApiErrorMessage(err: unknown): err is TApiErrorResponse {
     err !== null &&
     "status" in err &&
     "data" in err &&
-    typeof (err as TApiErrorResponse).data === "object" &&
-    err.data !== null
+    typeof err.data === "object" &&
+    err.data !== null &&
+    "statusCode" in err.data
   );
 }
