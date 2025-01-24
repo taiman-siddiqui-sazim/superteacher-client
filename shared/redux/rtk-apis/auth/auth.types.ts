@@ -1,3 +1,13 @@
+import {
+  EGender,
+  EEducationLevel,
+  EMedium,
+  ESchoolClass,
+  ECollegeClass,
+  EDegreeType,
+  EHighestEducationLevel,
+} from "@/shared/typedefs";
+
 export type TLoginRequestFields = {
   email: string;
   password: string;
@@ -21,5 +31,39 @@ export type TTokenizedUser = {
 
 export type TLoginResponse = {
   accessToken: string;
+  user: TTokenizedUser;
+};
+
+export type TRegisterStudentFields = {
+  firstName: string;
+  lastName: string;
+  gender: EGender;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  educationLevel: EEducationLevel;
+  password: string;
+  confirmPassword: string;
+  medium?: EMedium;
+  class?: ESchoolClass | ECollegeClass;
+  degreeType?: EDegreeType;
+  degreeName?: string;
+  semesterYear?: string;
+};
+
+export type TRegisterTeacherFields = {
+  firstName: string;
+  lastName: string;
+  uniqueCode: string;
+  gender: EGender;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  highestEducation: EHighestEducationLevel;
+  majorSubject: string;
+  subjects: string[];
+};
+
+export type TRegisterResponse = {
   user: TTokenizedUser;
 };
