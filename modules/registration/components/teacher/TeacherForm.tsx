@@ -57,7 +57,7 @@ const TeacherForm: React.FC = () => {
 
   useEffect(() => {
     if (resetPassword) {
-      reset({password: ""});
+      reset({ password: "" });
       setResetPassword(false);
     }
   }, [resetPassword, reset]);
@@ -362,13 +362,8 @@ const TeacherForm: React.FC = () => {
                       }}
                     />
                   </FormControl>
-                  <FormMessage
-                    className={cn(
-                      "text-red-500 mt-1 h-6 md:h-4",
-                      "opacity-0"
-                    )}
-                  >
-                  {" "}
+                  <FormMessage className={cn("text-red-500 mt-1 h-6 md:h-4", "opacity-0")}>
+                    {" "}
                   </FormMessage>
                 </FormItem>
               )}

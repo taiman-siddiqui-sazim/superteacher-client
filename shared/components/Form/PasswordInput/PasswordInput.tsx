@@ -9,7 +9,10 @@ import { Input } from "../../shadui/input";
 import { IPasswordInputProps } from "./PasswordInput.interfaces";
 
 const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
-  ({ className, isError, validate = false, showValidation = false, onValidationChange, ...props }, ref) => {
+  (
+    { className, isError, validate = false, showValidation = false, onValidationChange, ...props },
+    ref,
+  ) => {
     const [showPassword, setShowPassword] = useState(false);
     const [validations, setValidations] = useState({
       hasValidLength: false,
@@ -98,13 +101,19 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
         </div>
         {showValidation && (
           <div className="space-y-1">
-            <ValidationItem isValid={validations.hasValidLength} text="Between 8 and 128 characters" />
+            <ValidationItem
+              isValid={validations.hasValidLength}
+              text="Between 8 and 128 characters"
+            />
             <ValidationItem
               isValid={validations.hasUpperCase && validations.hasLowerCase}
               text="At least 1 uppercase & 1 lowercase character"
             />
             <ValidationItem isValid={validations.hasNumber} text="At least 1 number" />
-            <ValidationItem isValid={validations.hasSpecialChar} text="At least 1 special character" />
+            <ValidationItem
+              isValid={validations.hasSpecialChar}
+              text="At least 1 special character"
+            />
           </div>
         )}
         <style>{`

@@ -1,11 +1,6 @@
 import { z } from "zod";
 
-import {
-  EGender,
-  EEducationLevel,
-  EMedium,
-  EDegreeType,
-} from "@/shared/typedefs";
+import { EGender, EEducationLevel, EMedium, EDegreeType } from "@/shared/typedefs";
 
 export const studentFormSchema = z
   .object({

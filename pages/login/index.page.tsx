@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import LoginContainer from "@/modules/login/container/LoginContainer";
 import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { useSessionContext } from "@/shared/components/wrappers/AppInitializer/AppInitializerContext";
-import { DEFAULT_REDIRECT_PATH_AS_LOGGED_IN_USER} from "@/shared/constants/app.constants";
+import { DEFAULT_REDIRECT_PATH_AS_LOGGED_IN_USER } from "@/shared/constants/app.constants";
 import { NextApplicationPage } from "@/shared/typedefs";
 
 const Login: NextApplicationPage = () => {

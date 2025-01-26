@@ -79,7 +79,7 @@ const StudentForm: React.FC = () => {
 
   useEffect(() => {
     if (resetPassword) {
-      reset({password: ""});
+      reset({ password: "" });
       setResetPassword(false);
     }
   }, [resetPassword, reset]);
@@ -220,10 +220,7 @@ const StudentForm: React.FC = () => {
                     />
                   </FormControl>
                   <FormMessage
-                    className={cn(
-                      "text-red-500 mt-1 h-7 md:h-4",
-                      !errors.phone ? "opacity-0" : "",
-                    )}
+                    className={cn("text-red-500 mt-1 h-7 md:h-4", !errors.phone ? "opacity-0" : "")}
                   >
                     {errors.phone?.message?.toString() || " "}
                   </FormMessage>
@@ -544,37 +541,32 @@ const StudentForm: React.FC = () => {
             )}
           />
           <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
-          <FormField
-            control={control}
-            name="password"
-            render={({ field }) => (
-              <FormItem className="w-[80%] md:w-[50%]">
-                <FormLabel className="text-green-500">Password</FormLabel>
-                <FormControl>
-                  <PasswordInput
-                    placeholder="Enter your password"
-                    validate
-                    showValidation
-                    {...field}
-                    className="mt-1 block w-full text-black placeholder:text-gray-400"
-                    autoComplete="off"
-                    onChange={(error) => {
-                      field.onChange(error);
-                      clearErrors("password");
-                    }}
-                  />
-                </FormControl>
-                <FormMessage
-                  className={cn(
-                    "text-red-500 mt-1 h-6 md:h-4",
-                    "opacity-0"
-                  )}
-                >
-                {" "}
-                </FormMessage>
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={control}
+              name="password"
+              render={({ field }) => (
+                <FormItem className="w-[80%] md:w-[50%]">
+                  <FormLabel className="text-green-500">Password</FormLabel>
+                  <FormControl>
+                    <PasswordInput
+                      placeholder="Enter your password"
+                      validate
+                      showValidation
+                      {...field}
+                      className="mt-1 block w-full text-black placeholder:text-gray-400"
+                      autoComplete="off"
+                      onChange={(error) => {
+                        field.onChange(error);
+                        clearErrors("password");
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage className={cn("text-red-500 mt-1 h-6 md:h-4", "opacity-0")}>
+                    {" "}
+                  </FormMessage>
+                </FormItem>
+              )}
+            />
             <FormField
               control={control}
               name="confirm_password"
