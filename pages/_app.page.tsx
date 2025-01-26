@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
-
 import { Provider as ReduxProvider } from "react-redux";
 
+import NextHead from "@/shared/components/NextHead/NextHead";
 import { Toaster } from "@/shared/components/shadui/sonner";
 import AppInitializer from "@/shared/components/wrappers/AppInitializer";
 import ThemeProvider from "@/shared/components/wrappers/ThemeProvider";
@@ -24,6 +24,7 @@ export default function App(props: TCustomAppProps) {
     <ReduxProvider store={store}>
       <AppInitializer>
         <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+          <NextHead />
           <Toaster duration={NOTIFICATION_AUTO_CLOSE_TIMEOUT_IN_MILLISECONDS} />
           {Component.Guard ? <Component.Guard>{component}</Component.Guard> : component}
         </ThemeProvider>

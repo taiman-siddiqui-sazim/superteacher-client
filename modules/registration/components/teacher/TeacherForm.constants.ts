@@ -1,12 +1,12 @@
 import { TTeacherFormInitialValues } from "./TeacherForm.types";
 
 export const teacherFormInitialValues: TTeacherFormInitialValues = {
-  firstName: "",
-  lastName: "",
-  uniqueCode: "",
+  first_name: "",
+  last_name: "",
+  unique_code: "",
   email: "",
-  password: "",
-  confirmPassword: "",
-  majorSubject: "",
+  password: " ",
+  confirm_password: "",
+  major_subject: "",
   subjects: [],
 };

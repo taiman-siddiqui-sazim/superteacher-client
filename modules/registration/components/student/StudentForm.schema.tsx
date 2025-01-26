@@ -4,26 +4,24 @@ import {
   EGender,
   EEducationLevel,
   EMedium,
-  ESchoolClass,
-  ECollegeClass,
   EDegreeType,
 } from "@/shared/typedefs";
 
 export const studentFormSchema = z
   .object({
-    firstName: z
+    first_name: z
       .string()
       .trim()
-      .nonempty("First name is required")
+      .min(1, "First name is required")
       .max(50, "First name must be at most 50 characters"),
-    lastName: z
+    last_name: z
       .string()
       .trim()
-      .nonempty("Last name is required")
+      .min(1, "Last name is required")
       .max(50, "Last name must be at most 50 characters"),
     gender: z.nativeEnum(EGender, { errorMap: () => ({ message: "Invalid gender" }) }),
     email: z.string().min(1, "Email is required").email("Invalid email address"),
-    phoneNumber: z
+    phone: z
       .string()
       .regex(
         /^\d{10,15}$/,
@@ -34,7 +32,7 @@ export const studentFormSchema = z
       .trim()
       .min(1, "Address is required")
       .max(100, "Address must be at most 100 characters"),
-    educationLevel: z.nativeEnum(EEducationLevel, {
+    education_level: z.nativeEnum(EEducationLevel, {
       errorMap: () => ({ message: "Invalid education level" }),
     }),
     password: z
@@ -43,17 +41,20 @@ export const studentFormSchema = z
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,128}$/,
         "Password must be at least 8 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       ),
-    confirmPassword: z.string().trim().min(1, "Confirm password is required"),
+    confirm_password: z.string().trim().min(1, "Confirm password is required"),
     medium: z.nativeEnum(EMedium).optional(),
-    class: z.union([z.nativeEnum(ESchoolClass), z.nativeEnum(ECollegeClass)]).optional(),
-    degreeType: z.nativeEnum(EDegreeType).optional(),
-    degreeName: z
+    class: z
+      .string()
+      .regex(/^(1[0-2]|[1-9])$/, { message: "Class must be a digit from 1 to 12" })
+      .optional(),
+    degree_type: z.nativeEnum(EDegreeType).optional(),
+    degree_name: z
       .string()
       .trim()
       .min(1, "Degree name is required")
       .max(50, "Degree name must be at most 50 characters")
       .optional(),
-    semesterYear: z
+    semester_year: z
       .string()
       .trim()
       .min(1, "Semester/Year is required")
@@ -61,17 +62,17 @@ export const studentFormSchema = z
       .optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.password !== data.confirmPassword) {
+    if (data.password !== data.confirm_password) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Passwords do not match",
-        path: ["confirmPassword"],
+        path: ["confirm_password"],
       });
     }
 
     if (
-      data.educationLevel === EEducationLevel.School ||
-      data.educationLevel === EEducationLevel.College
+      data.education_level === EEducationLevel.School ||
+      data.education_level === EEducationLevel.College
     ) {
       if (!data.medium) {
         ctx.addIssue({
@@ -89,26 +90,26 @@ export const studentFormSchema = z
       }
     }
 
-    if (data.educationLevel === EEducationLevel.University) {
-      if (!data.degreeType) {
+    if (data.education_level === EEducationLevel.University) {
+      if (!data.degree_type) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Degree type is required",
-          path: ["degreeType"],
+          path: ["degree_type"],
         });
       }
-      if (!data.degreeName) {
+      if (!data.degree_name) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Degree name is required",
-          path: ["degreeName"],
+          path: ["degree_name"],
         });
       }
-      if (!data.semesterYear) {
+      if (!data.semester_year) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Semester/Year is required",
-          path: ["semesterYear"],
+          path: ["semester_year"],
         });
       }
     }

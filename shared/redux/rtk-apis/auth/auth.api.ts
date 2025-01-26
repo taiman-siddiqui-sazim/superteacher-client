@@ -5,7 +5,6 @@ import {
   TLoginRequestFields,
   TLoginResponse,
   TRegisterStudentFields,
-  TRegisterResponse,
   TRegisterTeacherFields,
 } from "./auth.types";
 
@@ -19,21 +18,21 @@ const authApi = projectApi.injectEndpoints({
       }),
       transformResponse: (response: TApiResponse<TLoginResponse>) => response.data,
     }),
-    registerStudent: builder.mutation<TRegisterResponse, TRegisterStudentFields>({
+    registerStudent: builder.mutation<TLoginResponse, TRegisterStudentFields>({
       query: (data) => ({
         url: "register/student",
         method: "POST",
-        body: data,
+        body: { user: data },
       }),
-      transformResponse: (response: TApiResponse<TRegisterResponse>) => response.data,
+      transformResponse: (response: TApiResponse<TLoginResponse>) => response.data,
     }),
-    registerTeacher: builder.mutation<TRegisterResponse, TRegisterTeacherFields>({
+    registerTeacher: builder.mutation<TLoginResponse, TRegisterTeacherFields>({
       query: (data) => ({
         url: "register/teacher",
         method: "POST",
         body: data,
       }),
-      transformResponse: (response: TApiResponse<TRegisterResponse>) => response.data,
+      transformResponse: (response: TApiResponse<TLoginResponse>) => response.data,
     }),
   }),
   overrideExisting: false,
