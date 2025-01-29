@@ -1,13 +1,13 @@
 import { TStudentFormInitialValues } from "./StudentForm.types";
 
 export const studentFormInitialValues: TStudentFormInitialValues = {
-  firstName: "",
-  lastName: "",
+  first_name: "",
+  last_name: "",
   email: "",
-  phoneNumber: "",
+  phone: "",
   address: "",
-  password: "",
-  confirmPassword: "",
-  degreeName: "",
-  semesterYear: "",
+  password: " ",
+  confirm_password: "",
+  degree_name: "",
+  semester_year: "",
 };

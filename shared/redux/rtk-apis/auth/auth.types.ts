@@ -35,35 +35,35 @@ export type TLoginResponse = {
 };
 
 export type TRegisterStudentFields = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   gender: EGender;
   email: string;
-  phoneNumber: string;
+  phone: string;
   address: string;
-  educationLevel: EEducationLevel;
+  education_level: EEducationLevel;
   password: string;
-  confirmPassword: string;
+  confirm_password: string;
   medium?: EMedium;
   class?: ESchoolClass | ECollegeClass;
-  degreeType?: EDegreeType;
-  degreeName?: string;
-  semesterYear?: string;
+  degree_type?: EDegreeType;
+  degree_name?: string;
+  semester_year?: string;
 };
 
 export type TRegisterTeacherFields = {
-  firstName: string;
-  lastName: string;
-  uniqueCode: string;
+  first_name: string;
+  last_name: string;
+  unique_code: string;
   gender: EGender;
   email: string;
   password: string;
-  confirmPassword: string;
-  highestEducation: EHighestEducationLevel;
-  majorSubject: string;
+  confirm_password: string;
+  highest_education: EHighestEducationLevel;
+  major_subject: string;
   subjects: string[];
 };
 
-export type TRegisterResponse = {
-  user: TTokenizedUser;
+export type TForgotPasswordResponse = {
+  message: string;
 };

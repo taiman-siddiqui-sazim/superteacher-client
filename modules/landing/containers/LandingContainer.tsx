@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import RoleModal from "@/modules/landing/components/RoleModal";
-import NextHead from "@/shared/components/NextHead";
 import { Card, CardHeader, CardTitle, CardContent, Button } from "@/shared/components/shadui";
 
 const LandingContainer = () => {
@@ -20,8 +19,6 @@ const LandingContainer = () => {
 
   return (
     <>
-      <NextHead />
-
       <div className="flex justify-center items-center h-screen">
         <Card className="sm:w-3/4 lg:w-3/5 h-[80vh] p-4 flex flex-col justify-center items-center border-transparent">
           <CardHeader>

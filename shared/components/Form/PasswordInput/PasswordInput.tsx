@@ -9,20 +9,23 @@ import { Input } from "../../shadui/input";
 import { IPasswordInputProps } from "./PasswordInput.interfaces";
 
 const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
-  ({ className, isError, showValidation = false, onValidationChange, ...props }, ref) => {
+  (
+    { className, isError, validate = false, showValidation = false, onValidationChange, ...props },
+    ref,
+  ) => {
     const [showPassword, setShowPassword] = useState(false);
-    const setValidations = useState({
+    const [validations, setValidations] = useState({
       hasValidLength: false,
       hasUpperCase: false,
       hasLowerCase: false,
       hasNumber: false,
       hasSpecialChar: false,
-    })[1];
+    });
 
     const disabled = props.value === "" || props.value === undefined || props.disabled;
 
     useEffect(() => {
-      if (showValidation && props.value) {
+      if (validate && props.value) {
         const password = props.value as string;
         const newValidations = {
           hasValidLength: password.length >= 8 && password.length <= 128,
@@ -54,7 +57,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
           onValidationChange(validationItems);
         }
       }
-    }, [props.value, onValidationChange, setValidations, showValidation]);
+    }, [props.value, onValidationChange, validate]);
 
     const ValidationItem = ({ isValid, text }: { isValid: boolean; text: string }) => (
       <div className="flex items-center space-x-2">
@@ -68,7 +71,7 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
     );
 
     return (
-      <div className="space-y-2">
+      <div className="space-y-1">
         <div className="relative">
           <Input
             type={showPassword ? "text" : "password"}
@@ -96,7 +99,23 @@ const PasswordInput = forwardRef<HTMLInputElement, IPasswordInputProps>(
             <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
           </Button>
         </div>
-
+        {showValidation && (
+          <div className="space-y-1">
+            <ValidationItem
+              isValid={validations.hasValidLength}
+              text="Between 8 and 128 characters"
+            />
+            <ValidationItem
+              isValid={validations.hasUpperCase && validations.hasLowerCase}
+              text="At least 1 uppercase & 1 lowercase character"
+            />
+            <ValidationItem isValid={validations.hasNumber} text="At least 1 number" />
+            <ValidationItem
+              isValid={validations.hasSpecialChar}
+              text="At least 1 special character"
+            />
+          </div>
+        )}
         <style>{`
           .hide-password-toggle::-ms-reveal,
           .hide-password-toggle::-ms-clear {

@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
 import { PasswordInput } from "@/shared/components/Form/PasswordInput";
@@ -66,15 +66,23 @@ const StudentForm: React.FC = () => {
     watch,
     formState: { errors, isSubmitted },
   } = form;
-  const [passwordValidationItems, setPasswordValidationItems] = useState<ReactNode>(null);
+
   const passwordValue = watch("password", "");
-  const confirmPasswordValue = watch("confirmPassword", "");
-  const educationLevelValue = watch("educationLevel") as EEducationLevel;
+  const confirmPasswordValue = watch("confirm_password", "");
+  const educationLevelValue = watch("education_level") as EEducationLevel;
+  const [resetPassword, setResetPassword] = useState(false);
 
   const handleReset = () => {
     reset(studentFormInitialValues);
-    setPasswordValidationItems(null);
+    setResetPassword(true);
   };
+
+  useEffect(() => {
+    if (resetPassword) {
+      reset({ password: "" });
+      setResetPassword(false);
+    }
+  }, [resetPassword, reset]);
 
   const passwordsMatch = passwordValue === confirmPasswordValue || confirmPasswordValue === "";
 
@@ -88,7 +96,7 @@ const StudentForm: React.FC = () => {
           <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
             <FormField
               control={control}
-              name="firstName"
+              name="first_name"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">First Name</FormLabel>
@@ -100,24 +108,24 @@ const StudentForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("firstName");
+                        clearErrors("first_name");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-8 md:h-3",
-                      !errors.firstName ? "opacity-0" : "",
+                      !errors.first_name ? "opacity-0" : "",
                     )}
                   >
-                    {errors.firstName?.message?.toString() || " "}
+                    {errors.first_name?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
             />
             <FormField
               control={control}
-              name="lastName"
+              name="last_name"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">Last Name</FormLabel>
@@ -129,17 +137,17 @@ const StudentForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("lastName");
+                        clearErrors("last_name");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-4 md:h-3",
-                      !errors.lastName ? "opacity-0" : "",
+                      !errors.last_name ? "opacity-0" : "",
                     )}
                   >
-                    {errors.lastName?.message?.toString() || " "}
+                    {errors.last_name?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
@@ -195,7 +203,7 @@ const StudentForm: React.FC = () => {
             />
             <FormField
               control={control}
-              name="phoneNumber"
+              name="phone"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[60%]">
                   <FormLabel className="text-green-500">Phone Number</FormLabel>
@@ -207,17 +215,14 @@ const StudentForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("phoneNumber");
+                        clearErrors("phone");
                       }}
                     />
                   </FormControl>
                   <FormMessage
-                    className={cn(
-                      "text-red-500 mt-1 h-7 md:h-4",
-                      !errors.phoneNumber ? "opacity-0" : "",
-                    )}
+                    className={cn("text-red-500 mt-1 h-7 md:h-4", !errors.phone ? "opacity-0" : "")}
                   >
-                    {errors.phoneNumber?.message?.toString() || " "}
+                    {errors.phone?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
@@ -251,14 +256,14 @@ const StudentForm: React.FC = () => {
           />
           <FormField
             control={control}
-            name="educationLevel"
+            name="education_level"
             render={({ field }) => (
               <FormItem className="w-[80%] md:w-[100%]">
                 <FormLabel className="text-green-500">Education Level</FormLabel>
                 <Select
                   onValueChange={(value) => {
                     field.onChange(value);
-                    clearErrors("educationLevel");
+                    clearErrors("education_level");
                   }}
                   value={field.value || ""}
                 >
@@ -288,10 +293,10 @@ const StudentForm: React.FC = () => {
                 <FormMessage
                   className={cn(
                     "text-red-500 mt-1 h-6 md:h-4",
-                    !errors["educationLevel"] ? "opacity-0" : "",
+                    !errors["education_level"] ? "opacity-0" : "",
                   )}
                 >
-                  {errors["educationLevel"]?.message?.toString() || " "}
+                  {errors["education_level"]?.message?.toString() || " "}
                 </FormMessage>
               </FormItem>
             )}
@@ -403,14 +408,14 @@ const StudentForm: React.FC = () => {
               <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
                 <FormField
                   control={control}
-                  name="degreeType"
+                  name="degree_type"
                   render={({ field }) => (
                     <FormItem className="w-[80%] md:w-[40%]">
                       <FormLabel className="text-green-500">Degree Type</FormLabel>
                       <Select
                         onValueChange={(value) => {
                           field.onChange(value);
-                          clearErrors("degreeType");
+                          clearErrors("degree_type");
                         }}
                         value={field.value || ""}
                       >
@@ -450,7 +455,7 @@ const StudentForm: React.FC = () => {
                 />
                 <FormField
                   control={control}
-                  name="degreeName"
+                  name="degree_name"
                   render={({ field }) => (
                     <FormItem className="w-[80%] md:w-[60%]">
                       <FormLabel className="text-green-500">Degree Name</FormLabel>
@@ -462,17 +467,17 @@ const StudentForm: React.FC = () => {
                           autoComplete="off"
                           onChange={(error) => {
                             field.onChange(error);
-                            clearErrors("degreeName");
+                            clearErrors("degree_name");
                           }}
                         />
                       </FormControl>
                       <FormMessage
                         className={cn(
                           "text-red-500 mt-1 h-7 md:h-5",
-                          !errors.degreeName ? "opacity-0" : "",
+                          !errors.degree_name ? "opacity-0" : "",
                         )}
                       >
-                        {errors.degreeName?.message?.toString() || " "}
+                        {errors.degree_name?.message?.toString() || " "}
                       </FormMessage>
                     </FormItem>
                   )}
@@ -480,7 +485,7 @@ const StudentForm: React.FC = () => {
               </div>
               <FormField
                 control={control}
-                name="semesterYear"
+                name="semester_year"
                 render={({ field }) => (
                   <FormItem className="w-[80%] md:w-[100%]">
                     <FormLabel className="text-green-500">Semester/Year</FormLabel>
@@ -492,23 +497,49 @@ const StudentForm: React.FC = () => {
                         autoComplete="off"
                         onChange={(error) => {
                           field.onChange(error);
-                          clearErrors("semesterYear");
+                          clearErrors("semester_year");
                         }}
                       />
                     </FormControl>
                     <FormMessage
                       className={cn(
                         "text-red-500 mt-1 h-7 md:h-5",
-                        !errors.semesterYear ? "opacity-0" : "",
+                        !errors.semester_year ? "opacity-0" : "",
                       )}
                     >
-                      {errors.semesterYear?.message?.toString() || " "}
+                      {errors.semester_year?.message?.toString() || " "}
                     </FormMessage>
                   </FormItem>
                 )}
               />
             </>
           )}
+          <FormField
+            control={control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="w-[80%] md:w-[100%]">
+                <FormLabel className="text-green-500">Email</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your email"
+                    {...field}
+                    className="mt-1 block w-full text-black placeholder:text-gray-400"
+                    autoComplete="off"
+                    onChange={(error) => {
+                      field.onChange(error);
+                      clearErrors("email");
+                    }}
+                  />
+                </FormControl>
+                <FormMessage
+                  className={cn("text-red-500 mt-1 h-7 md:h-4", !errors.email ? "opacity-0" : "")}
+                >
+                  {errors.email?.message?.toString() || " "}
+                </FormMessage>
+              </FormItem>
+            )}
+          />
           <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
             <FormField
               control={control}
@@ -519,8 +550,8 @@ const StudentForm: React.FC = () => {
                   <FormControl>
                     <PasswordInput
                       placeholder="Enter your password"
+                      validate
                       showValidation
-                      onValidationChange={setPasswordValidationItems}
                       {...field}
                       className="mt-1 block w-full text-black placeholder:text-gray-400"
                       autoComplete="off"
@@ -530,24 +561,15 @@ const StudentForm: React.FC = () => {
                       }}
                     />
                   </FormControl>
-                  <FormMessage
-                    className={cn(
-                      "text-red-500 mt-1 h-32 md:h-24",
-                      !errors.password && (!passwordValidationItems || field.value === "")
-                        ? "opacity-0"
-                        : "",
-                    )}
-                  >
-                    {errors.password?.message?.toString() ||
-                      (field.value !== "" && passwordValidationItems) ||
-                      " "}
+                  <FormMessage className={cn("text-red-500 mt-1 h-6 md:h-4", "opacity-0")}>
+                    {" "}
                   </FormMessage>
                 </FormItem>
               )}
             />
             <FormField
               control={control}
-              name="confirmPassword"
+              name="confirm_password"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">Confirm Password</FormLabel>
@@ -559,19 +581,19 @@ const StudentForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("confirmPassword");
+                        clearErrors("confirm_password");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
-                      "text-red-500 mt-1 h-16 md:h-24",
-                      !errors.confirmPassword && (confirmPasswordValue === "" || passwordsMatch)
+                      "text-red-500 mt-1 h-12 md:h-28",
+                      !errors.confirm_password && (confirmPasswordValue === "" || passwordsMatch)
                         ? "opacity-0"
                         : "",
                     )}
                   >
-                    {errors.confirmPassword?.message?.toString() ||
+                    {errors.confirm_password?.message?.toString() ||
                       (confirmPasswordValue !== "" &&
                         !passwordsMatch &&
                         "Passwords do not match") ||

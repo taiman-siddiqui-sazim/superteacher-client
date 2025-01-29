@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
 import { PasswordInput } from "@/shared/components/Form/PasswordInput";
@@ -45,14 +45,22 @@ const TeacherForm: React.FC = () => {
     watch,
     formState: { errors },
   } = form;
-  const [passwordValidationItems, setPasswordValidationItems] = useState<ReactNode>(null);
+
   const passwordValue = watch("password", "");
-  const confirmPasswordValue = watch("confirmPassword", "");
+  const confirmPasswordValue = watch("confirm_password", "");
+  const [resetPassword, setResetPassword] = useState(false);
 
   const handleReset = () => {
     reset(teacherFormInitialValues);
-    setPasswordValidationItems(null);
+    setResetPassword(true);
   };
+
+  useEffect(() => {
+    if (resetPassword) {
+      reset({ password: "" });
+      setResetPassword(false);
+    }
+  }, [resetPassword, reset]);
 
   const passwordsMatch = passwordValue === confirmPasswordValue || confirmPasswordValue === "";
 
@@ -66,7 +74,7 @@ const TeacherForm: React.FC = () => {
           <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
             <FormField
               control={control}
-              name="firstName"
+              name="first_name"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">First Name</FormLabel>
@@ -78,24 +86,24 @@ const TeacherForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("firstName");
+                        clearErrors("first_name");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-8 md:h-5",
-                      !errors.firstName ? "opacity-0" : "",
+                      !errors.first_name ? "opacity-0" : "",
                     )}
                   >
-                    {errors.firstName?.message?.toString() || " "}
+                    {errors.first_name?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
             />
             <FormField
               control={control}
-              name="lastName"
+              name="last_name"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">Last Name</FormLabel>
@@ -107,17 +115,17 @@ const TeacherForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("lastName");
+                        clearErrors("last_name");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-8 md:h-5",
-                      !errors.lastName ? "opacity-0" : "",
+                      !errors.last_name ? "opacity-0" : "",
                     )}
                   >
-                    {errors.lastName?.message?.toString() || " "}
+                    {errors.last_name?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
@@ -172,7 +180,7 @@ const TeacherForm: React.FC = () => {
           </div>
           <FormField
             control={control}
-            name="uniqueCode"
+            name="unique_code"
             render={({ field }) => (
               <FormItem className="w-[80%] md:w-[100%]">
                 <FormLabel className="text-green-500">Enter registration code</FormLabel>
@@ -184,17 +192,17 @@ const TeacherForm: React.FC = () => {
                     autoComplete="off"
                     onChange={(error) => {
                       field.onChange(error);
-                      clearErrors("uniqueCode");
+                      clearErrors("unique_code");
                     }}
                   />
                 </FormControl>
                 <FormMessage
                   className={cn(
                     "text-red-500 mt-1 h-7 md:h-5",
-                    !errors.uniqueCode ? "opacity-0" : "",
+                    !errors.unique_code ? "opacity-0" : "",
                   )}
                 >
-                  {errors.uniqueCode?.message?.toString() || " "}
+                  {errors.unique_code?.message?.toString() || " "}
                 </FormMessage>
               </FormItem>
             )}
@@ -202,7 +210,7 @@ const TeacherForm: React.FC = () => {
           <div className="w-full flex flex-col md:flex-row md:space-x-4 items-center justify-center">
             <FormField
               control={control}
-              name="majorSubject"
+              name="major_subject"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[60%]">
                   <FormLabel className="text-green-500">Major Subject</FormLabel>
@@ -214,31 +222,31 @@ const TeacherForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("majorSubject");
+                        clearErrors("major_subject");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-9 md:h-5",
-                      !errors.majorSubject ? "opacity-0" : "",
+                      !errors.major_subject ? "opacity-0" : "",
                     )}
                   >
-                    {errors.majorSubject?.message?.toString() || " "}
+                    {errors.major_subject?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
             />
             <FormField
               control={control}
-              name="highestEducation"
+              name="highest_education"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">Highest Education</FormLabel>
                   <ShadSelect
                     onValueChange={(value) => {
                       field.onChange(value);
-                      clearErrors("highestEducation");
+                      clearErrors("highest_education");
                     }}
                     value={field.value || ""}
                   >
@@ -268,10 +276,10 @@ const TeacherForm: React.FC = () => {
                   <FormMessage
                     className={cn(
                       "text-red-500 mt-1 h-7 md:h-5",
-                      !errors["highestEducation"] ? "opacity-0" : "",
+                      !errors["highest_education"] ? "opacity-0" : "",
                     )}
                   >
-                    {errors["highestEducation"]?.message?.toString() || " "}
+                    {errors["highest_education"]?.message?.toString() || " "}
                   </FormMessage>
                 </FormItem>
               )}
@@ -343,8 +351,8 @@ const TeacherForm: React.FC = () => {
                   <FormControl>
                     <PasswordInput
                       placeholder="Enter your password"
+                      validate
                       showValidation
-                      onValidationChange={setPasswordValidationItems}
                       {...field}
                       className="mt-1 block w-full text-black placeholder:text-gray-400"
                       autoComplete="off"
@@ -354,24 +362,15 @@ const TeacherForm: React.FC = () => {
                       }}
                     />
                   </FormControl>
-                  <FormMessage
-                    className={cn(
-                      "text-red-500 mt-1 h-32 md:h-24",
-                      !errors.password && (!passwordValidationItems || field.value === "")
-                        ? "opacity-0"
-                        : "",
-                    )}
-                  >
-                    {errors.password?.message?.toString() ||
-                      (field.value !== "" && passwordValidationItems) ||
-                      " "}
+                  <FormMessage className={cn("text-red-500 mt-1 h-6 md:h-4", "opacity-0")}>
+                    {" "}
                   </FormMessage>
                 </FormItem>
               )}
             />
             <FormField
               control={control}
-              name="confirmPassword"
+              name="confirm_password"
               render={({ field }) => (
                 <FormItem className="w-[80%] md:w-[50%]">
                   <FormLabel className="text-green-500">Confirm Password</FormLabel>
@@ -383,19 +382,19 @@ const TeacherForm: React.FC = () => {
                       autoComplete="off"
                       onChange={(error) => {
                         field.onChange(error);
-                        clearErrors("confirmPassword");
+                        clearErrors("confirm_password");
                       }}
                     />
                   </FormControl>
                   <FormMessage
                     className={cn(
-                      "text-red-500 mt-1 h-16 md:h-24",
-                      !errors.confirmPassword && (confirmPasswordValue === "" || passwordsMatch)
+                      "text-red-500 mt-1 h-12 md:h-28",
+                      !errors.confirm_password && (confirmPasswordValue === "" || passwordsMatch)
                         ? "opacity-0"
                         : "",
                     )}
                   >
-                    {errors.confirmPassword?.message?.toString() ||
+                    {errors.confirm_password?.message?.toString() ||
                       (confirmPasswordValue !== "" &&
                         !passwordsMatch &&
                         "Passwords do not match") ||

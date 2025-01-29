@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import ForgotPasswordModal from "@/modules/forgot-password/components/ForgotPasswordModal";
+import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 
 import LoginForm from "../components/LoginForm/LoginForm";
 
 const LoginContainer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [clearErrors, setClearErrors] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const router = useRouter();
 
   const handleForgotPasswordSubmit = () => {
     setIsModalOpen(false);
@@ -23,6 +26,19 @@ const LoginContainer = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  const handleRegisterClick = () => {
+    setIsNavigating(true);
+    router.push("/");
+  };
+
+  if (isNavigating) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-center items-center h-screen p-4">
@@ -47,12 +63,12 @@ const LoginContainer = () => {
             <span className="sm:text-base lg:text-sm text-white-500">
               Don&apos;t have an account?
             </span>
-            <Link
-              href="/register"
-              className="sm:text-base lg:text-sm text-green-500 hover:underline"
+            <button
+              onClick={handleRegisterClick}
+              className="sm:text-base lg:text-sm text-green-500 hover:underline bg-transparent border-none p-0"
             >
               Get back and register
-            </Link>
+            </button>
           </div>
         </div>
       </div>
