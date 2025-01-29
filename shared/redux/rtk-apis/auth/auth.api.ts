@@ -6,13 +6,14 @@ import {
   TLoginResponse,
   TRegisterStudentFields,
   TRegisterTeacherFields,
+  TForgotPasswordResponse,
 } from "./auth.types";
 
 const authApi = projectApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<TLoginResponse, TLoginRequestFields>({
       query: (data) => ({
-        url: "login",
+        url: "authorize/login",
         method: "POST",
         body: data,
       }),
@@ -20,7 +21,7 @@ const authApi = projectApi.injectEndpoints({
     }),
     registerStudent: builder.mutation<TLoginResponse, TRegisterStudentFields>({
       query: (data) => ({
-        url: "register/student",
+        url: "users/register/student",
         method: "POST",
         body: { user: data },
       }),
@@ -28,14 +29,42 @@ const authApi = projectApi.injectEndpoints({
     }),
     registerTeacher: builder.mutation<TLoginResponse, TRegisterTeacherFields>({
       query: (data) => ({
-        url: "register/teacher",
+        url: "users/register/teacher",
         method: "POST",
         body: data,
       }),
       transformResponse: (response: TApiResponse<TLoginResponse>) => response.data,
     }),
+    forgotPassword: builder.mutation<TForgotPasswordResponse, string>({
+      query: (email) => ({
+        url: "authorize/passwords/forgot",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    checkOtp: builder.mutation({
+      query: (data) => ({
+        url: "authorize/passwords/check_otp",
+        method: "POST",
+        body: { email: data.email, otp: data.otp },
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: "authorize/passwords/reset",
+        method: "POST",
+        body: { email: data.email, otp: data.otp, password: data.password },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useLoginMutation, useRegisterStudentMutation, useRegisterTeacherMutation } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterStudentMutation,
+  useRegisterTeacherMutation,
+  useForgotPasswordMutation,
+  useCheckOtpMutation,
+  useResetPasswordMutation,
+} = authApi;
