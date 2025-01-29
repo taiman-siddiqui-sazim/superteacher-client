@@ -63,3 +63,7 @@ export type TRegisterTeacherFields = {
   major_subject: string;
   subjects: string[];
 };
+
+export type TForgotPasswordResponse = {
+  message: string;
+};
