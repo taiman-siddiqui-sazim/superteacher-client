@@ -12,7 +12,6 @@ import {
 } from "@/shared/components/shadui";
 import { useResetPasswordMutation } from "@/shared/redux/rtk-apis/auth/auth.api";
 
-
 import { IResetPasswordProps } from "./ForgotPassword.interfaces";
 
 const ResetPassword: React.FC<IResetPasswordProps> = ({ email, otp, onClose }) => {
@@ -31,13 +30,19 @@ const ResetPassword: React.FC<IResetPasswordProps> = ({ email, otp, onClose }) =
     }
 
     try {
-      const response = await resetPassword({ email: registeredEmail, otp: valid_otp, password: newPassword }).unwrap();
+      const response = await resetPassword({
+        email: registeredEmail,
+        otp: valid_otp,
+        password: newPassword,
+      }).unwrap();
       if (response) {
         toast.success(response.message);
         onClose();
       }
     } catch (error) {
-        setErrorMessage((error as { data?: { error?: string } })?.data?.error || "Failed to reset password.");
+      setErrorMessage(
+        (error as { data?: { error?: string } })?.data?.error || "Failed to reset password.",
+      );
     }
   };
 

@@ -44,7 +44,9 @@ const OtpModal: React.FC<IOtpModalProps> = ({ email, onClose }) => {
         setIsResetPasswordOpen(true);
       }
     } catch (error) {
-        setErrorMessage((error as { data?: { error?: string } })?.data?.error || "Failed to verify OTP.");
+      setErrorMessage(
+        (error as { data?: { error?: string } })?.data?.error || "Failed to verify OTP.",
+      );
     }
   };
 
@@ -77,7 +79,9 @@ const OtpModal: React.FC<IOtpModalProps> = ({ email, onClose }) => {
               className="w-3/4 text-black mb-1"
             />
             {errorMessage && <p className="text-sm text-red-500 w-3/4 text-left">{errorMessage}</p>}
-            <p className="text-sm text-gray-400 w-3/4 text-left">Enter the OTP sent to your email</p>
+            <p className="text-sm text-gray-400 w-3/4 text-left">
+              Enter the OTP sent to your email
+            </p>
           </div>
           <div className="flex justify-between w-3/4 mx-auto mt-4">
             <Button onClick={handleCancel} className="bg-purple-600 text-white hover:bg-purple-500">
