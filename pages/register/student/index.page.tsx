@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import StudentFormContainer from "@/modules/registration/containers/StudentFormContainer";
 import LoadingSpinner from "@/shared/components/LoadingSpinner/LoadingSpinner";
 import { useSessionContext } from "@/shared/components/wrappers/AppInitializer/AppInitializerContext";
-import { DASHBOARD_PATH } from "@/shared/constants/app.constants";
+import { DASHBOARD_ROUTE } from "@/shared/constants/route.constants";
 
 const RegisterStudentPage: React.FC = () => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const RegisterStudentPage: React.FC = () => {
     if (isLoading || typeof location === "undefined") return;
 
     if (user) {
-      router.push(DASHBOARD_PATH(user.user_type, user.id));
+      router.replace(DASHBOARD_ROUTE);
     } else {
       setIsCheckingAuth(false);
     }

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { toast } from "sonner";
-
 import {
   Dialog,
   DialogContent,
@@ -38,7 +36,6 @@ const OtpModal: React.FC<IOtpModalProps> = ({ email, onClose }) => {
     try {
       const response = await checkOtp({ email: registeredEmail, otp: otp }).unwrap();
       if (response) {
-        toast.success(response.message);
         setErrorMessage(null);
         setIsOpen(false);
         setIsResetPasswordOpen(true);
@@ -65,7 +62,7 @@ const OtpModal: React.FC<IOtpModalProps> = ({ email, onClose }) => {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleCancel}>
-        <DialogContent className="bg-white max-w-xs px-2">
+        <DialogContent className="bg-white max-w-xs md:max-w-sm px-0">
           <DialogHeader>
             <DialogTitle className="text-xl text-center text-green-500 mb-4">
               Enter OTP code

@@ -48,25 +48,27 @@ const ResetPassword: React.FC<IResetPasswordProps> = ({ email, otp, onClose }) =
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="bg-white bg-opacity-90 max-w-xs px-2">
+      <DialogContent className="bg-white bg-opacity-90 max-w-xs md:max-w-sm px-0">
         <DialogHeader>
           <DialogTitle className="text-xl text-center text-green-500 mb-4">
             Reset Password
           </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center w-full mb-2">
-          <PasswordInput
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(event) => setNewPassword(event.target.value)}
-            className="w-full text-black mb-6"
-          />
-          <PasswordInput
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            className="w-full text-black mb-1"
-          />
+          <div className="w-3/4">
+            <PasswordInput
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(event) => setNewPassword(event.target.value)}
+              className="w-full text-black mb-6"
+            />
+            <PasswordInput
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              className="w-full text-black mb-1"
+            />
+          </div>
           {errorMessage && <p className="text-sm text-red-500 w-3/4 text-left">{errorMessage}</p>}
         </div>
         <div className="flex justify-between w-3/4 mx-auto mt-4">

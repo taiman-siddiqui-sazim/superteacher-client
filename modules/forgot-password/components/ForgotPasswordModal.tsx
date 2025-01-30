@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { toast } from "sonner";
 import { z } from "zod";
@@ -23,12 +23,6 @@ const ForgotPasswordModal: React.FC<IForgotPasswordProps> = ({ isOpen, onClose, 
   const [emailError, setEmailError] = useState<string | null>(null);
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const [otpEmail, setOtpEmail] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (emailError) {
-      setEmailError(null);
-    }
-  }, [email, emailError]);
 
   const handleSubmit = async () => {
     try {
@@ -61,7 +55,7 @@ const ForgotPasswordModal: React.FC<IForgotPasswordProps> = ({ isOpen, onClose, 
   return (
     <>
       <Dialog open={isOpen} onOpenChange={handleCancel}>
-        <DialogContent className="bg-white max-w-xs px-2">
+        <DialogContent className="bg-white max-w-xs md:max-w-sm px-0">
           <DialogHeader>
             <DialogTitle className="text-xl text-center text-green-500 mb-4">
               FORGOT PASSWORD
