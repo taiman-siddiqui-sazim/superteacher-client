@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { cn } from "@/lib/utils";
+import { useReset } from "@/modules/registration/components/RegisterForm.helpers";
 import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 import MultiSelect from "@/shared/components/MultiSelect";
 import {
@@ -48,19 +49,8 @@ const TeacherForm: React.FC = () => {
 
   const passwordValue = watch("password", "");
   const confirmPasswordValue = watch("confirm_password", "");
-  const [resetPassword, setResetPassword] = useState(false);
 
-  const handleReset = () => {
-    reset(teacherFormInitialValues);
-    setResetPassword(true);
-  };
-
-  useEffect(() => {
-    if (resetPassword) {
-      reset({ password: "" });
-      setResetPassword(false);
-    }
-  }, [resetPassword, reset]);
+  const { handleReset } = useReset(reset, teacherFormInitialValues);
 
   const passwordsMatch = passwordValue === confirmPasswordValue || confirmPasswordValue === "";
 

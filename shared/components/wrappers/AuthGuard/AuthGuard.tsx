@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
-import Unauthorized from "../../Unauthorized/Unauthorized";
 import { useSessionContext } from "../AppInitializer/AppInitializerContext";
 import { TAuthGuardProps } from "./AuthGuard.types";
 import {
@@ -24,15 +23,19 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
   useEffect(() => {
     if (isLoading || typeof location === "undefined") return;
 
-    if (!isLoading && isUnauthenticated) {
+    if (!isLoading && (isUnauthenticated)) {
       const redirectTo = `${location.pathname}${location.search}`;
       router.push(getLoginUrlWithRedirectParam(redirectTo));
     }
-  }, [router, isLoading, error, isUnauthenticated, isUnauthorized]);
+  }, [router, isLoading, error, isUnauthenticated]);
 
-  if (isLoading) return <LoadingSpinner />;
-
-  if (isUnauthenticated || isUnauthorized) return <Unauthorized />;
+  if (isLoading || isUnauthenticated || isUnauthorized) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return <>{children}</>;
 };
