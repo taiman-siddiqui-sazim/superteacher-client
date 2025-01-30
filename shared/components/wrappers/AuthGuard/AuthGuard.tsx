@@ -23,7 +23,7 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
   useEffect(() => {
     if (isLoading || typeof location === "undefined") return;
 
-    if (!isLoading && (isUnauthenticated)) {
+    if (!isLoading && isUnauthenticated) {
       const redirectTo = `${location.pathname}${location.search}`;
       router.push(getLoginUrlWithRedirectParam(redirectTo));
     }
@@ -31,7 +31,9 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
 
   if (isLoading || isUnauthenticated || isUnauthorized) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
+      >
         <LoadingSpinner />
       </div>
     );

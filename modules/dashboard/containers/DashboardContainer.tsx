@@ -1,17 +1,16 @@
+import React from "react";
+import { useState } from "react";
 
-import React from 'react';
-import { useState } from 'react';
-
-import Navbar from '@/shared/components/Navbar';
+import Navbar from "@/shared/components/Navbar";
 
 const DashboardContainer = () => {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    return (
-        <div>
-          {isDialogOpen}
-          <Navbar setIsDialogOpen={setIsDialogOpen} />
-        </div>
+  return (
+    <div>
+      {isDialogOpen}
+      <Navbar setIsDialogOpen={setIsDialogOpen} />
+    </div>
   );
 };
 
