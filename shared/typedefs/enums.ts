@@ -52,3 +52,13 @@ export enum ESubjects {
   English = "English",
   Bangla = "Bangla",
 }
+
+export enum EDaysOfTheWeek {
+  Sunday = "Sunday",
+  Monday = "Monday",
+  Tuesday = "Tuesday",
+  Wednesday = "Wednesday",
+  Thursday = "Thursday",
+  Friday = "Friday",
+  Saturday = "Saturday",
+}

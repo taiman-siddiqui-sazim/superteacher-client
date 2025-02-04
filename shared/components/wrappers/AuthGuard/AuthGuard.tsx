@@ -23,13 +23,13 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
   useEffect(() => {
     if (isLoading || typeof location === "undefined") return;
 
-    if (!isLoading && isUnauthenticated) {
+    if (!isLoading && (isUnauthenticated || isUnauthorized)) {
       const redirectTo = `${location.pathname}${location.search}`;
       router.push(getLoginUrlWithRedirectParam(redirectTo));
     }
-  }, [router, isLoading, error, isUnauthenticated]);
+  }, [router, isLoading, error, isUnauthenticated, isUnauthorized]);
 
-  if (isLoading || isUnauthenticated || isUnauthorized) {
+  if (isLoading) {
     return (
       <div
         style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
