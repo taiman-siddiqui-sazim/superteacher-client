@@ -30,9 +30,7 @@ export const useLoginForm = () => {
       setInLocalStorage(ACCESS_TOKEN_LOCAL_STORAGE_KEY, data.accessToken);
       await getMe().unwrap();
       toast.success("Login successful!");
-      setTimeout(() => {
-        router.replace(DASHBOARD_ROUTE);
-      }, 1000);
+      router.replace(DASHBOARD_ROUTE);
     } catch (error) {
       toast.error("Login failed", {
         description: parseApiErrorMessage(error),

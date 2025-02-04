@@ -19,7 +19,7 @@ const Navbar = ({
   };
 
   return (
-    <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
+    <nav className="bg-gray-900 text-white p-4 flex justify-between items-center relative">
       <div className="text-lg font-semibold">Dashboard</div>
       <div className="flex items-center space-x-6">
         <FaPlus
@@ -39,7 +39,7 @@ const Navbar = ({
         <FaBars className="text-xl cursor-pointer" onClick={toggleMenu} />
       </div>
       {isExpanded && (
-        <div className="absolute top-16 right-0 bg-gray-800 text-white p-4 rounded shadow-lg">
+        <div className="absolute top-16 right-0 bg-gray-800 text-white p-4 rounded shadow-lg z-50">
           <ul>
             <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">Profile</li>
             <li className="py-2 px-4 hover:bg-gray-700 cursor-pointer">Settings</li>

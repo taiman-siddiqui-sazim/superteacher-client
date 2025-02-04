@@ -149,7 +149,7 @@ const TeacherForm: React.FC = () => {
                         <SelectItem
                           key={gender}
                           value={gender}
-                          className="focus:bg-white focus:text-black hover:bg-gray-200"
+                          className="focus:bg-gray focus:text-black hover:bg-gray-200"
                         >
                           {gender}
                         </SelectItem>
@@ -256,7 +256,7 @@ const TeacherForm: React.FC = () => {
                         <SelectItem
                           key={option.value}
                           value={option.value}
-                          className="focus:bg-white focus:text-black hover:bg-gray-200"
+                          className="focus:bg-gray focus:text-black hover:bg-gray-200"
                         >
                           {option.label}
                         </SelectItem>

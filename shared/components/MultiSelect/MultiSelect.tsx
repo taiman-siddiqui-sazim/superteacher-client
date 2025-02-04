@@ -11,7 +11,7 @@ const customStyles: StylesConfig<{ value: string; label: string }, true> = {
   }),
   dropdownIndicator: (provided) => ({
     ...provided,
-    color: "#374151",
+    color: "#6B7280",
   }),
 };
 
@@ -23,7 +23,7 @@ const MultiSelect: React.FC<IMultiSelectProps> = ({ options, value, onChange, pl
     onChange={onChange}
     placeholder={placeholder}
     styles={customStyles}
-    className="mt-1 block w-full text-black"
+    className="mt-1 block w-full text-black border border-gray-600"
   />
 );
 
