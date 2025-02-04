@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { cn } from "@/lib/utils";
+import { useReset } from "@/modules/registration/components/RegisterForm.helpers";
 import { PasswordInput } from "@/shared/components/Form/PasswordInput";
 import {
   Input,
@@ -70,19 +71,8 @@ const StudentForm: React.FC = () => {
   const passwordValue = watch("password", "");
   const confirmPasswordValue = watch("confirm_password", "");
   const educationLevelValue = watch("education_level") as EEducationLevel;
-  const [resetPassword, setResetPassword] = useState(false);
 
-  const handleReset = () => {
-    reset(studentFormInitialValues);
-    setResetPassword(true);
-  };
-
-  useEffect(() => {
-    if (resetPassword) {
-      reset({ password: "" });
-      setResetPassword(false);
-    }
-  }, [resetPassword, reset]);
+  const { handleReset } = useReset(reset, studentFormInitialValues);
 
   const passwordsMatch = passwordValue === confirmPasswordValue || confirmPasswordValue === "";
 
