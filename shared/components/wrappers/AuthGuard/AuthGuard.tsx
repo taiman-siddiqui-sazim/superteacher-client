@@ -31,9 +31,7 @@ const AuthGuard = ({ children, allowedRoles }: TAuthGuardProps) => {
 
   if (isLoading) {
     return (
-      <div
-        style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}
-      >
+      <div className="flex justify-center items-center h-screen">
         <LoadingSpinner />
       </div>
     );
