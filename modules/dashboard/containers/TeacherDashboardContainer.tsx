@@ -12,7 +12,11 @@ import { useGetClassroomsQuery } from "@/shared/redux/rtk-apis/classrooms/classr
 const TeacherDashboardContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { user } = useSessionContext();
-  const { data: classrooms, isLoading, isError } = useGetClassroomsQuery(user?.id ? user.id.toString() : "");
+  const {
+    data: classrooms,
+    isLoading,
+    isError,
+  } = useGetClassroomsQuery(user?.id ? user.id.toString() : "");
 
   const handleOpenClassroomModal = () => {
     setIsDialogOpen(true);
