@@ -12,7 +12,7 @@ import { useGetClassroomsQuery } from "@/shared/redux/rtk-apis/classrooms/classr
 const TeacherDashboardContainer = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { user } = useSessionContext();
-  const { data: classrooms, isLoading } = useGetClassroomsQuery(user?.id ? user.id.toString() : "");
+  const { data: classrooms, isLoading, isError } = useGetClassroomsQuery(user?.id ? user.id.toString() : "");
 
   const handleOpenClassroomModal = () => {
     setIsDialogOpen(true);
@@ -30,7 +30,7 @@ const TeacherDashboardContainer = () => {
           <div className="flex flex-1 justify-center items-center w-full">
             <p>Loading...</p>
           </div>
-        ) : classrooms && classrooms.length > 0 ? (
+        ) : !isError && classrooms && classrooms.length > 0 ? (
           <DisplayClassrooms classrooms={classrooms} />
         ) : (
           <div className="flex flex-1 justify-center items-center w-full">
