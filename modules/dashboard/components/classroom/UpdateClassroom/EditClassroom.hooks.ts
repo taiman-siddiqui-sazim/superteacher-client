@@ -16,15 +16,16 @@ export const useEditClassroomForm = (onClose: () => void, classroom: TClassroom)
   });
   const [updateClassroom] = useUpdateClassroomMutation();
 
-  const onSubmit = async (values: Omit<TClassroom, 'teacher_id'>) => {
-
+  const onSubmit = async (values: Omit<TClassroom, "teacher_id">) => {
     try {
       await updateClassroom(values).unwrap();
       toast.success("Classroom updated successfully!");
       form.reset();
       onClose();
     } catch (error) {
-      const errorMessage = (error as { data?: { message?: string[] } })?.data?.message?.[0] || parseApiErrorMessage(error);
+      const errorMessage =
+        (error as { data?: { message?: string[] } })?.data?.message?.[0] ||
+        parseApiErrorMessage(error);
       toast.error("Classroom update failed", {
         description: errorMessage,
       });

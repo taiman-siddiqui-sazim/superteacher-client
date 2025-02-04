@@ -1,14 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
-import { Dialog, DialogContent, Button } from '@/shared/components/shadui';
-import { useDeleteClassroomMutation } from '@/shared/redux/rtk-apis/classrooms/classroom.api';
+import { Dialog, DialogContent, Button } from "@/shared/components/shadui";
+import { useDeleteClassroomMutation } from "@/shared/redux/rtk-apis/classrooms/classroom.api";
 
-import { IDeleteClassroomModalProps } from './UpdateClassroom.interfaces';
+import { IDeleteClassroomModalProps } from "./UpdateClassroom.interfaces";
 
-
-const DeleteClassroomModal: React.FC<IDeleteClassroomModalProps> = ({ isOpen, onClose, classroomId }) => {
+const DeleteClassroomModal: React.FC<IDeleteClassroomModalProps> = ({
+  isOpen,
+  onClose,
+  classroomId,
+}) => {
   const [deleteClassroom] = useDeleteClassroomMutation();
 
   const handleDelete = async () => {
@@ -17,7 +20,8 @@ const DeleteClassroomModal: React.FC<IDeleteClassroomModalProps> = ({ isOpen, on
       toast.success("Classroom deleted successfully!");
       onClose();
     } catch (error) {
-      const errorMessage = (error as { data?: { message?: string[] } })?.data?.message?.[0] || "Something went wrong";
+      const errorMessage =
+        (error as { data?: { message?: string[] } })?.data?.message?.[0] || "Something went wrong";
       toast.error("Classroom deletion failed", {
         description: errorMessage,
       });

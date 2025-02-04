@@ -50,5 +50,10 @@ const classroomsApi = projectApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useCreateClassroomMutation, useGetClassroomsQuery, useUpdateClassroomMutation, useDeleteClassroomMutation } = classroomsApi;
+export const {
+  useCreateClassroomMutation,
+  useGetClassroomsQuery,
+  useUpdateClassroomMutation,
+  useDeleteClassroomMutation,
+} = classroomsApi;
 export default classroomsApi;

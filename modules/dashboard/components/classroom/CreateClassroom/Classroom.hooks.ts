@@ -10,8 +10,7 @@ import { classroomInitialValues } from "./Classroom.constants";
 import classroomSchema from "./Classroom.schema";
 
 export const useClassroomForm = (onClose: () => void) => {
-
-  const form = useForm<Omit<TClassroom, 'teacher_id'>>({
+  const form = useForm<Omit<TClassroom, "teacher_id">>({
     resolver: zodResolver(classroomSchema),
     defaultValues: classroomInitialValues,
     mode: "onChange",
@@ -19,15 +18,16 @@ export const useClassroomForm = (onClose: () => void) => {
   });
   const [createClassroom] = useCreateClassroomMutation();
 
-  const onSubmit = async (values: Omit<TClassroom, 'teacher_id'>) => {
-
+  const onSubmit = async (values: Omit<TClassroom, "teacher_id">) => {
     try {
       await createClassroom(values).unwrap();
       toast.success("Classroom created successfully!");
       form.reset();
       onClose();
     } catch (error) {
-      const errorMessage = (error as { data?: { message?: string[] } })?.data?.message?.[0] || parseApiErrorMessage(error);
+      const errorMessage =
+        (error as { data?: { message?: string[] } })?.data?.message?.[0] ||
+        parseApiErrorMessage(error);
       toast.error("Classroom creation failed", {
         description: errorMessage,
       });

@@ -1,4 +1,4 @@
-import { TClassroom } from '@/shared/redux/rtk-apis/classrooms/classroom.types';
+import { TClassroom } from "@/shared/redux/rtk-apis/classrooms/classroom.types";
 
 export interface IEditClassroomModalProps {
   isOpen: boolean;
@@ -7,7 +7,7 @@ export interface IEditClassroomModalProps {
 }
 
 export interface IDeleteClassroomModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    classroomId: number;
+  isOpen: boolean;
+  onClose: () => void;
+  classroomId: number;
 }

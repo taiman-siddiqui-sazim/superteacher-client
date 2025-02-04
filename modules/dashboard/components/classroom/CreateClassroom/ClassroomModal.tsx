@@ -2,7 +2,19 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 import MultiSelect from "@/shared/components/MultiSelect";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, Button, Input, Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/shared/components/shadui";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  Button,
+  Input,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/shared/components/shadui";
 import {
   Form,
   FormControl,
@@ -28,7 +40,13 @@ const subjectsOptions = Object.values(ESubjects).map((subject) => ({
 
 const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => {
   const { form, onSubmit } = useClassroomForm(onClose);
-  const { handleSubmit, control, clearErrors, reset, formState: { errors } } = form;
+  const {
+    handleSubmit,
+    control,
+    clearErrors,
+    reset,
+    formState: { errors },
+  } = form;
 
   const handleCancel = () => {
     clearErrors();
@@ -40,7 +58,9 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
     <Dialog open={isOpen} onOpenChange={handleCancel}>
       <DialogContent className="bg-white max-w-xs md:max-w-md px-0">
         <DialogHeader>
-          <DialogTitle className="text-xl text-center text-green-500 mb-0">CREATE A CLASSROOM</DialogTitle>
+          <DialogTitle className="text-xl text-center text-green-500 mb-0">
+            CREATE A CLASSROOM
+          </DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
@@ -63,8 +83,10 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
                         }}
                       />
                     </FormControl>
-                    <FormMessage className={cn("text-red-500 mt-1 h-6", !errors['title'] ? "opacity-0" : "")}>
-                      {errors['title']?.message?.toString() || " "}
+                    <FormMessage
+                      className={cn("text-red-500 mt-1 h-6", !errors["title"] ? "opacity-0" : "")}
+                    >
+                      {errors["title"]?.message?.toString() || " "}
                     </FormMessage>
                   </FormItem>
                 )}
@@ -79,7 +101,7 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
                       <MultiSelect
                         options={daysOfWeekOptions}
                         value={daysOfWeekOptions.filter((option) =>
-                          (field.value as EDaysOfTheWeek[] || []).includes(option.value),
+                          ((field.value as EDaysOfTheWeek[]) || []).includes(option.value),
                         )}
                         onChange={(selectedOptions) => {
                           field.onChange(selectedOptions.map((option) => option.value));
@@ -107,45 +129,45 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
                     <FormLabel className="text-green-500">Subject</FormLabel>
                     <Select
                       onValueChange={(value) => {
-                      field.onChange(value);
-                      clearErrors("subject");
-                    }}
-                    value={field.value || ""}
-                  >
-                    <FormControl>
-                      <SelectTrigger
-                        className={cn(
-                          "bg-white",
-                          field.value ? "text-black" : "text-gray-400",
-                          "hover:text-gray-700",
-                        )}
+                        field.onChange(value);
+                        clearErrors("subject");
+                      }}
+                      value={field.value || ""}
                     >
-                      <SelectValue placeholder="Select your subject" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-white text-black">
-                    {subjectsOptions.map((option) => (
-                      <SelectItem
-                        key={option.value}
-                        value={option.value}
-                        className="focus:bg-gray focus:text-black hover:bg-gray-200"
-                      >
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage
-                  className={cn(
-                    "text-red-500 mt-1 h-7 md:h-6",
-                    !errors["subject"] ? "opacity-0" : "",
-                  )}
-                >
-                  {errors["subject"]?.message?.toString() || " "}
-                </FormMessage>
-              </FormItem>
-              )}
-            />
+                      <FormControl>
+                        <SelectTrigger
+                          className={cn(
+                            "bg-white",
+                            field.value ? "text-black" : "text-gray-400",
+                            "hover:text-gray-700",
+                          )}
+                        >
+                          <SelectValue placeholder="Select your subject" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-white text-black">
+                        {subjectsOptions.map((option) => (
+                          <SelectItem
+                            key={option.value}
+                            value={option.value}
+                            className="focus:bg-gray focus:text-black hover:bg-gray-200"
+                          >
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage
+                      className={cn(
+                        "text-red-500 mt-1 h-7 md:h-6",
+                        !errors["subject"] ? "opacity-0" : "",
+                      )}
+                    >
+                      {errors["subject"]?.message?.toString() || " "}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={control}
                 name="class_time"
@@ -163,11 +185,16 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
                           field.onChange(event);
                           clearErrors("class_time");
                         }}
-                        onFocus={(event) => event.target.type = 'time'}
-                        onBlur={(event) => event.target.type = 'time'}
+                        onFocus={(event) => (event.target.type = "time")}
+                        onBlur={(event) => (event.target.type = "time")}
                       />
                     </FormControl>
-                    <FormMessage className={cn("text-red-500 mt-1 h-6", !errors["class_time"] ? "opacity-0" : "")}>
+                    <FormMessage
+                      className={cn(
+                        "text-red-500 mt-1 h-6",
+                        !errors["class_time"] ? "opacity-0" : "",
+                      )}
+                    >
                       {errors["class_time"]?.message?.toString() || " "}
                     </FormMessage>
                   </FormItem>
@@ -175,10 +202,18 @@ const ClassroomModal: React.FC<IClassroomModalProps> = ({ isOpen, onClose }) => 
               />
             </div>
             <div className="flex justify-between w-4/5 mx-auto mt-4">
-              <Button type="button" onClick={handleCancel} className="bg-purple-600 text-white hover:bg-purple-500">
+              <Button
+                type="button"
+                onClick={handleCancel}
+                className="bg-purple-600 text-white hover:bg-purple-500"
+              >
                 Cancel
               </Button>
-              <Button type="submit" className="bg-green-600 text-white hover:bg-green-500" disabled={false}>
+              <Button
+                type="submit"
+                className="bg-green-600 text-white hover:bg-green-500"
+                disabled={false}
+              >
                 Create
               </Button>
             </div>
